@@ -108,15 +108,8 @@ export class PassportProcessing {
   }
 
   private validEcl(value: string) {
-    if (
-      value === 'amb' ||
-      value === 'blu' ||
-      value === 'brn' ||
-      value === 'gry' ||
-      value === 'grn' ||
-      value === 'hzl' ||
-      value === 'oth'
-    ) {
+    const validColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
+    if (validColors.includes(value)) {
       return true;
     }
     return false;
