@@ -53,5 +53,13 @@ describe('BinaryBoarding', () => {
 
       console.log(highestSeatId);
     });
+
+    it('should print the solution for part two (missing seatId', () => {
+      const seatCodesFilePath = 'src/seatCodes.txt';
+
+      const missingSeatId = binaryBoarding.missingSeatIdFrom(seatCodesFilePath);
+
+      console.log(missingSeatId);
+    });
   });
 });

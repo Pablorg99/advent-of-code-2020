@@ -1,6 +1,25 @@
 import * as fs from 'fs';
 
 export class BinaryBoarding {
+  missingSeatIdFrom(seatCodesFilePath: string) {
+    let seatIds: Array<number> = [];
+    const seatCodes = fs.readFileSync(seatCodesFilePath).toString();
+    for (const seatCode of seatCodes.split('\n')) {
+      seatIds.push(this.seatIdForSeatCode(seatCode));
+    }
+    return this.missingFromMinimumToMaximum(seatIds);
+  }
+
+  missingFromMinimumToMaximum(seatIds: number[]) {
+    const minimum = Math.min(...seatIds);
+    const maximum = Math.max(...seatIds);
+    for (let seatId = minimum; seatId < maximum; seatId++) {
+      if (!seatIds.includes(seatId)) {
+        return seatId;
+      }
+    }
+  }
+
   highestSeatIdFrom(seatCodesFilePath: string) {
     let seatIds: Array<number> = [];
     const seatCodes = fs.readFileSync(seatCodesFilePath).toString();
