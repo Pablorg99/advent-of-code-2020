@@ -5,10 +5,11 @@ export class PasswordPhilosophy {
     let validPasswords = 0;
     const fileContent = fs.readFileSync(passwordFilePath).toString();
     for (const line of fileContent.split("\n")) {
-      const minimum = parseInt(line.split("-")[0]);
-      const maximum = parseInt(line.split("-")[1].split(" ")[0]);
-      const character = line.split(" ")[1][0];
-      const password = line.split(" ")[2];
+      const matches = line.match(/([0-9]*)-([0-9]*) ([a-z]): (.*)/);
+      const minimum = parseInt(matches[1]);
+      const maximum = parseInt(matches[2]);
+      const character = matches[3];
+      const password = matches[4];
       if (this.isValidPasswordForPartOne({ minimum, maximum, character, password })) {
         validPasswords++;
       }
@@ -30,10 +31,11 @@ export class PasswordPhilosophy {
     let validPasswords = 0;
     const fileContent = fs.readFileSync(passwordFilePath).toString();
     for (const line of fileContent.split("\n")) {
-      const firstPosition = parseInt(line.split("-")[0]);
-      const secondPosition = parseInt(line.split("-")[1].split(" ")[0]);
-      const character = line.split(" ")[1][0];
-      const password = line.split(" ")[2];
+      const matches = line.match(/([0-9]*)-([0-9]*) ([a-z]): (.*)/);
+      const firstPosition = parseInt(matches[1]);
+      const secondPosition = parseInt(matches[2]);
+      const character = matches[3];
+      const password = matches[4];
       if (this.isValidPasswordForPartTwo({ firstPosition, secondPosition, character, password })) {
         validPasswords++;
       }
@@ -53,6 +55,7 @@ export class PasswordPhilosophy {
     if (password[firstPosition - 1] === character) {
       characterMatches++;
     }
+
     if (password[secondPosition - 1] === character) {
       characterMatches++;
     }
